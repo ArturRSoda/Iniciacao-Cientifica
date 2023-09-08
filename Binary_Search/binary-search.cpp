@@ -20,6 +20,8 @@ int main() {
 	int v[] = {3, 5, 6, 1, 5};
 
 	int b;
+	int n = sizeof(v)/sizeof(v[0]);
+	sort(v, v+n);
 	b = binary_search(5, v, 3);
 	printf("%d \n", b);
 
