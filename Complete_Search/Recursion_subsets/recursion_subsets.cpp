@@ -4,6 +4,8 @@
 
 using namespace std;
 
+// retorna um vetor com todos subsets de um conjunto
+
 void search(vector<vector<int>>& main_set, vector<int> subset, int k, int n) {
 	if (k == n) {
 		main_set.push_back(subset);

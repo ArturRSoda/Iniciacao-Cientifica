@@ -1,6 +1,8 @@
 #include <iostream>
 #include <bits/stdc++.h>
 
+//retorna o soma maxima possivel de um subarray
+
 using namespace std;
 
 int main() {

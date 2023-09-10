@@ -4,6 +4,8 @@
 
 using namespace std;
 
+//numero maximo de dispor N rainhas em um tabuleiro NxN
+
 void search(vector<int>& column,
 		   vector<int>& diag1,
 		   vector<int>& diag2,

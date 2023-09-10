@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 #include <algorithm>
 
+//retorna a posicao de um X de um vetor SORTEADO
+
 using namespace std;
 
 int binary_search(int n, int v[], int x) {
