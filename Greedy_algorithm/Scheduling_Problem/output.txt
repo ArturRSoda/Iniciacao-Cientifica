@@ -1,1 +1,0 @@
-numero maximo de eventos: 2

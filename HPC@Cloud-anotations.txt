@@ -1,0 +1,56 @@
+HPC@Cloud
+
+    - Software open-source que facilita a migracao, testes e execucao de aplicacoes HPC em nuvem publica.
+    - Utiliza tecnologias de tolerancia a falhas, que permitem a utilizacao de uma estrutura nuvem mais barata, conhecidas como spots.
+    - Permite que usuarios implementarem aplicacoes complecas de clusters virtuais de HPC.
+    - Consegue uma aproximacao satisfatoria dos custos de para a infraestrutura de HPC na nuvem.
+
+    - Resultado demonstra que utilizacao de instancias spot nao garante diminuicao de custo, dependendo do disconte a na tecnica de tolerancia a falha utilizada.
+
+
+
+BACKGROUND AND MOTIVATION
+
+    - Cound Computing Platforms:
+        - Providencia infraestrutura de computacao e softwares de servicos, com um modelo 'paga-por-uso', o que permite que pequenas organizacoes entrem no mercado.
+        - Tres tipos de plataformas:
+            - Publicas: Qualquer um pode acessar, sem necessidade contratos de longo termos.
+            - Privadas: Acessivel apenas para um organizacao/grupo especifico com direito a acesso.
+            - Hybridas: Plataformas que disponibilizam nuvem publicas e privadas.
+        - Providencia diferentes tipos de infraestruturas, VM sao as mais comuns e acessiveis.
+        - Algumas plataformas disponibilizam infraestruturas para aplicacoes HPC, mas em geral sao bem mais caras.
+
+
+    - Mercado de SPOT:
+        - STPOT sao maquinas "passageiras", que nao estao sendo utilizados no momento pela plataforma CLOUD, e por isso acabam tendo um presso bem mais acessiveis.
+        - Entretanto, o negativo esta que a plataforma pode retomar essas maquinas sem aviso previo, conforme a demanda para maquinas padroes aumenta, assim fica por responsabilidade do usuario a persistencia de seus dados.
+        - O mercado de maquinas SPOT funciona da seguinte maneira:
+            - O usuario diz o quanto que ele esta querendo pagar por essas instancias, e a plataforma providencia conforme disponivel.
+            - Alem de que geralemnte os precos por instancias spots variam muito, mas isso depedende do providenciador, por exeplo, a Oracle possui pressos fixos.
+
+
+    - Container technologies:
+        - Uma unidade de software que uni componentes e funcionalidades necessarias para um aplicativo.
+        - Principal vantagem eh sua portabilidade, uma vez que um aplicacao e suas dependencias estao em um container, pode ser lancado em qualquer lugar.
+        - Softaware Singularity de containers, se destaca para embientes de HPC, por ter integracao de clusters HPC e diversas ferramentas, alem de ser facil de usar, mesmo para pessoas nao familiarizadas com containeralizacao ou sistemas HPC.
+
+
+    - Dificuldades de convergencia entre nuvem e HPC:
+        - no contexto de HPC, a utilizacao de nuvem para implementacao de HPC, com o metodo de pago-por-uso eh bastante chamativo.
+        - Entretanto, ainda ha um longo caminho, A utilizacao de instancias spots pode afetar bastante a performace de HPC, pois eh preciso ter um eficiente estrategia de tolerancia a falhas, e percistencia eh umas das coisas mais importantes no contexto de HPC.
+        - Tambem, conselheiros de custo, apesar de funcionarem bem para infraestruturas comuns de numve, em um ambiente HPC pode nao funcionar, por nao conseguir advinhar a duracao de uma execucao.
+        - Ademais, eh preciso ter um gerenciador de recursos HPC eficiente, o que plataformas cloud geralmente nao providenciam.
+
+
+RELATED WORKS:
+    - Diversos estudos exploram a viabilidade de uso de spots para aplicacoes HPC na nuvem, Entretanto o artigo  se expante introduzindo um conjunto de ferramentas geral que permitea a migracao de aqualquer ambiente HPC para plataformas cloud.
+    - Alem de considerar o custo beneficio.
+      Ademais apresanta uma nova estrategia adaptativa de tolerancia a falhas baseado em ULFM, em que nao precisa parar a aplicacao quando a plataforma cloud toma as instancias spot.
+
+
+
+
+
+
+
+
