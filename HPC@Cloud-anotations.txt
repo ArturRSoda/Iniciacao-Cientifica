@@ -48,6 +48,84 @@ RELATED WORKS:
       Ademais apresanta uma nova estrategia adaptativa de tolerancia a falhas baseado em ULFM, em que nao precisa parar a aplicacao quando a plataforma cloud toma as instancias spot.
 
 
+ARQUITETURA HPC@CLOUD
+    - Para facilitar a migracao de aplicacoes de HPC legados para plataformas nuvem, o HPC@Cloud oferrece ferramentas que podem ser executadas na maquina do usuario.
+    - Em geral a arquitetura eh dividida nos seguintes modulos.
+        1. Interface de comandos: Onde o usuario pode escrever comandos e receber informacoes sobre os estados dos clusters e tarefas sendo executadas.
+        2. Gerenciados de recursos: Cuida da integracao ao provedor, criacao, monitoramento e destruicao de instancias.
+        3. gerenciados MPI, incorpora os mecanismos de tolerancia a falha para a utilizacao de instancias spots.
+        4. Modulo de armazenamento, e coletor de metadados experimentais, que compilam dados de execucao que serao usados pelo modulo de previsao de custos.
+        5. Modulo de previsao de custos, que pode ser implementados modulos analisticos e de machine learning para prever custos de forma eficiente, com base em dados de execucoes ja realizados.
+        
+
+    - Gerenciando recursos nuvem.
+        - HPC@Cloud utiliza o conceito de Infrastructure as Code (IaC). Ou seja, gere infraestrutura de comptuacao atraves de codigo, em vez de processos e configuracao manuais.
+        - Assim, o HPC@Cloud utiliza da ferramentas open-source ja existentes sempre que possivel.
+        - Por exemplo, eh utilizado Terraform, uma ferramenta que possui um abordagem mais declarativas para definicao de infra estrutura.
+        - Entao, o modulo de gerenciador de recusos eh capaz de gerar planos Terraform, em HCL (Lembra JSON). Entao usuarios conseguem ter paramentros de configuracao de alto nivel como input (numeros de nos de clusters, tipos de instancias, armazenamento, opcoes de memoria, etc).
+
+
+    - Gerenciando ciclo de vida de instancias spots.
+        - o Gerenciador de recusos possui uma rotina que periodicamente confere a saude dos nos spot. E entao, possui algumas estrategias para quando algum no falha ou eh retomado.
+            1. Nao restaura: Ignora o no falho e continua rodando a aplicacao com as instancias que sobraram.
+            2. Bloqueio e Restaura: o Gerenciador de recursos marca checkpoints, periodicamente ou nao, antes de uma falha acontecer. E quando um no falha, os outros sao pausados ateh que o cluster eh reconstruido ao ultimo checkpoint.
+            3. Restauracao adaptativa: Permite a execucao a execucao inenterrupta, enquando o novo no spot eh reconstuido.
+        - Dependendo do provedor nuvem, eh possivel utilizar mecanismos que preve falhas eminetes, como na AWS que envia um warning de 2 minutos antes da instancia spot ser retomada.
+
+
+    - Gerenciando tolerancia a falhas
+        2 estrategias
+        - Berkeley labs checkpoint-restart (BLCR):
+            - Aproveitando da notificacao de reposse de instancias da AWS, essa estrategia cria checkpoinst reemptivos e reativos, lanca pedidos para um novo spot, e escuta os alarmes enviados pelo provedor numve.
+            - Entao, checkpoins periodicos ou preemptivos sao feitos em um intervalo de tempo pre-definido, enquanto checkpoints reativos sao acionados de acordo com as notificacoes da AWS. Os checkpoints periodicos sao necessarios para provedores que nao disponibilizam desses alarmes.
+            - A vantagem eh que essa estrategia eh simples o suficiente, de formq que nao eh preciso mudar o codigo da aplicacao MPI.
+            - Mas apresenta algumas limitacoes:
+                - BLCR precisa de versoes especificas de kernel linux, deficies de serem instaladas que com problemas de seguranca.
+                - Executaveis precisam ser compilados como binarios staticos para que os checkpoints sejam possiveis.
+                - BLCR somente suporta MPI sobre TCP/IP, entao nao aguenta infiniband nem outros meios de coneccoes de alta velocidade.
+                - Nem toda biblioteca MPI suporta BLCR.
+                - BLCR nao suporta restauracao adaptativa.
+
+        - User-Level failure mitigation (ULFM):
+            - ULFM permite que aplicacoes se adaptem seu comportamento e continuem executando mesmo com a presenca de falha em um processo, permitidno restauracoes adaptativas.
+            - Entretanto, isso eh necessitado dos desenvolvedores para a implementacao de suas proprias solucoes, considerando as caracteristicas e requisitos de suas proprias aplicacoes.
+            - Tambem possui suas limitacoes:
+                - Diferente da BLCR, ULFM nao dispoe de uma solucao pronta para o uso. Entao o usuario precisa implementar sua propria estrategia de tolerancia a falha, precisando entao de mudancas ao coditgo do MPI.
+                - nem tods biblioteca MPI dispoe de um suporte compreensivo para ULFM.
+                - ateh o momento, ULFM APIs for MPI estao disponeives exclusivamente para programas em C.
+
+
+        - Colecao de metadados e previsao de custo.
+            - A previsao de custo eh algo importante para as organizacaoes, pois dependendo do tamanho do sistema, as despexsas podem exceder mesmo aos de data-center fisicos.
+            - o HPC@Cloude automaticamente coleta metadados de cargas-de-trabalhos executados na interface de comandos. e utiliza um modelo de ML de regressao linear, que eh treinado utilizando o dado reunido de execucoes ja realizadas.
+            - Entao, executando varios exeperimentos com varias combinacoes de clusters, o usuario pode acumular um dataset suficiente para o treinamento do modelo.
+            - Quanto mais exeperimentos sao conduzidos, melhor a aproximacao do modelo HPC@Cloud.
+
+
+RESULTADOS DOS EXEPERIMENTOS
+    - Eficiencia do gerenciador de recursos
+        - Foi medido o tempo medio gastado para configurar toda a infra esturtura, em diferentes clusters na AWS (de 1, 2, 4, e 8 nos).
+        - Em duas situacoes, com todas as dependencias sendo montadas e instaladas depois do booting do sistema, desdo inicio. E com maquinas com imagens pre-montadas da Amazon, com todas as dependencias ja instaladas
+        - Resultados mostrarm uma diferenca de tempo significantes para as maquinas pre-montadas, sendo escenciasis para o lancamento de cluster e reducao de custo.
+
+
+    - Avaliacao de estrategias de tolerancia a falhas.
+        - foram testadas clusters utilizando instancias em demanda, e utilizando spots, e como a revogacao de instancias pode nao acontecer, isso foi simulado artificialmente.
+        - Nos testes foram utilizados diferentes estrategias de tolerancia a falha (BLCR e ULFM) e suas variacoes.
+        - Os teste demonstra que BLCR apresenta um custo maior que as estrategias ULFM. Entretanto, usar BLCR pode ter um maior custo beneficio, quando consideramos os gastos associados a integracao da ULFM, pois BLCR ja eh pronto ao uso.
+        - Tambem foi considerado, que se o metodo de checkpoint foir muito custoso, vale mais apena usar cargas de trabalhos em instancias em demanda, sem a utilizacao de estrategias de tolerancia a falha.
+
+
+CONCLUSAO
+    - Estrategia de ULFM foi o que apresentou melhores resultados
+    - Previsao de custo tem uma aproximacao de 93%, entretanto foi revelado que a utilizacao de instancias spots nao garante uma economizacao de custo, quando avaliado em diferentes paltaformas cloud.
+    - Conteineralizacao se apresentou ser bem eficiente.
+
+EXTENCOES
+    - Fazer o modulo de gerenciamento de trabalhos para acomodar outras estrategias de checkpoinst, considerando as tecnologias de migracao dos conteiners.
+
+
+
 
 
 
