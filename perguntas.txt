@@ -1,0 +1,5 @@
+1. Os artigos ja apresentam algumas estrategias de tolerancia a falha, o BLCR (checkpoints) e o ULFM (Restauracao adaptativa, pede outro nodo sem parar a execucao), dai a ideia da bolsa seria melhorar essas estrategias, ou pesquisar outras?
+
+2. Nos artigos citam ferramentas como terraform (para facilitar a gerencia de recursos nuvem) e singularity (para conteinearizacao), eh preciso que eu conheca um pouco como utilizar essas ferramentas?
+
+3. os artigos so falo de instancias spot, nao comento sobre as instancias burstibles. o Foco seria mais em instancias spots mesmo?

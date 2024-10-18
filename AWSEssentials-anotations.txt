@@ -1,0 +1,72 @@
+MODULO 1
+    O que eh um modelo cliente-servidor?
+        - Na computacao, um cliente pode ser uma pagina web, ou um aplicativo desktop que faz pedidos ao server.
+        - Entao, server podem ser servicos como a AWS que respondem o pedido.
+
+
+    Implementacao de modelos para computacao na nuvem.
+        - Implementacao baseada em nuvem:
+            - Roda todas as partes da aplicacao na nuvem.
+            - Pode migrar uma aplicacao ja existente a nuvem.
+            - Ou iniciar uma aplicacao do zero direto na nuvem
+
+        - Implementacao local ou privadas:
+            - Implatacao de recursos usando virtualizacao e ferramentas de gerenciamento de recursos.
+            - Aumenta a utilizacao de recursos usando tecnologias de virtualizacao e gerenciamento de recurso.
+            - Imagina uma tecnologia que eh totalmente mantida na empresa.
+
+        - Implementacao Hybrida.
+            - Recursos da nuvem se conectam com infraestrutura local.
+            - Integra recursos baseados em nuvem com aplicativos legados.
+
+
+    Beneficios de cloud computing:
+        - Troca o adiantamento de custos (Investir em recursos antes de usalos) por um metodo onde se paga conforme o uso.
+        - Nao ha gastos para manutencao de infraestruturas e servers.
+        - Nao eh preciso prever a capacidade que vc pai precisar, antes de implementar o sistema.
+        - Menos custo, por causa da grande demanda.
+        - Maior flexibilidade.
+        - Possui alcance global
+
+
+MODULO 2
+    Amazon Elastic Compute Cloud (Amazon EC2)
+         - Amazon EC2 dispoe capacidade de computacao redimensionavel e segura na nuvem como intancias Amazon EC2.
+
+    Como Amazon EC2 funciona?
+        - Lancamento:
+            - Primeiro eh lancado uma instancia, selecionando seu template e configuracoes basica, como SO, server ou aplicacoes.
+            - Tambem eh possivel escolhe as especificacoes de hardware.
+
+        - Coneccao:
+            - Agora as instancias sao conectadas.
+            - Ha diferentes metodos de coneccao entre instancias.
+
+        - Uso:
+            - Por fim, eh so comecar a usar. Usar comando, instalar software, adicionar armazenamento, etc.
+
+
+    Tipos de Instancias Amazon EC2.
+        - Diferentes instancias sao otimizadas para tarefas diferentes.
+
+        - Instancias de proposito geral:
+            - Dispoe de recursos de rede, memoria e computacao balanceados.
+
+        - Instancias de computacao otimizados:
+            - Ideais para aplicacoes que se beneficiam com processadores de alta performace.
+
+        - Instancias otimizadas a memoria:
+            - desenhados para entregar uma alta performace para tarefas que demandam de um processamento de grandes dataset na memoria.
+
+        - Intancias de computacao Acelerada:
+            - Usa acelerador de hardware, para ter uma performace melhor em algumas funcoes, quando comparado com um CPU comum.
+
+        - Instancias otimizadas a armazenamento:
+            - Desenhadas para tarefas que precisam de uma alta e sequencial leitura e escrita em um armazenamento local com grande quantidade de dados.
+
+
+
+
+
+
+
