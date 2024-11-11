@@ -21,6 +21,7 @@ To get started:
 	- Install [aws cli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html), if you plan to use AWS
 	- Install [python](https://www.python.org/downloads/) version 3.11 or higher (ideally, install [pyenv](https://github.com/pyenv/pyenv#installation) and setup a virtual environment for HPC@Cloud)
 
+
 2. **First time setup**
 	- Run Docker and launch the dev containers with the following:
 	```shell
@@ -51,11 +52,13 @@ You are now ready to use HPC@Cloud!
 1. To create a cluster configuration, copy the `cluster_config.example.yaml` file and rename it to `cluster_config.yaml`. 
 	- **Note that the example file is just a template and may not work correctly in all environments.** The settings provided in the example file (e.g., AWS region, instance types, SSH keys, and storage configurations) should be adjusted according to your own infrastructure and requirements.
 
+
 2. Once you've edited the file to match your requirements, run the following from the command-line:
 ```shell
 hpcac create-cluster
 ```
 After the execution completes, the cluster will be available over SSH connection.
+
 
 3. To destroy your cluster, run:
 ```shell
