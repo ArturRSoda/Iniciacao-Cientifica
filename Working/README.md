@@ -38,7 +38,7 @@ aws configure
 
 To generate your AWS Access and Secret keys, follow the instructions in the official AWS documentation: 
 	- [Managing Access Keys for IAM Users](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-key-self-managed.html) 
-	- [Managing Access Keys for the Root User](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user_manage_add-key.html) -->
+	- [Managing Access Keys for the Root User](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user_manage_add-key.html)
 
 It should create the file `~/.aws/configure` with the `default` profile.
 
