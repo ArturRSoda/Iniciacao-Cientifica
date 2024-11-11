@@ -71,7 +71,7 @@ Once you've edited the file to fit your needs, run the following from the comman
 ```shell
 hpcac run-tasks
 ```
-**Note: The results produced by the tasks should be saved in the result folder.**
+**Note: The results produced by the tasks should be saved in the './result' folder.**
 
 # Publications
 
