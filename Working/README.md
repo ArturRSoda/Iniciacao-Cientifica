@@ -71,7 +71,7 @@ from the command-line:
 ```shell
 hpcac run-tasks
 ```
-**Note: The results produced by the tasks should be saved in the result folder.
+**Note: The results produced by the tasks should be saved in the result folder.**
 
 # Publications
 
