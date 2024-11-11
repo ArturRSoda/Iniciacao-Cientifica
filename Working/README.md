@@ -45,7 +45,7 @@ It should create the file `~/.aws/configure` with the `default` profile.
 ### The `cluster_config.yaml` file
 
 To create a cluster configuration, copy the `cluster_config.example.yaml` file and rename it to `cluster_config.yaml`. 
-	- **Note that the example file is just an example and may not work correctly in all environments.** You should edit the file according to your specific needs and infrastructure setup. Make sure to adjust parameters such as cloud provider configurations, instance types, and network settings.
+- **Note that the example file is just an example and may not work correctly in all environments.** You should edit the file according to your specific needs and infrastructure setup. Make sure to adjust parameters such as cloud provider configurations, instance types, and network settings.
 
 Once you've edited the file to match your requirements, run the following from the command-line:
 ```shell
