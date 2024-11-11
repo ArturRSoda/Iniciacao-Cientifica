@@ -64,10 +64,10 @@ hpcac destroy-cluster
 ### The `tasks_config.yaml` file and the `my_files` directory
 
 Place all the files you want to transfer to the cluster inside the `my_files` folder.
-To setup a task to be executed in the cluster, copy the `tasks_config.example.yaml` file
-and rename it to `tasks_config.yaml`. Edit the file as you like, and then run
-from the command-line:
+To set up a task to be executed in the cluster, copy the `tasks_config.example.yaml` file and rename it to `tasks_config.yaml`. 
+- **Note that the example file is just a template.** You should edit this file to match the specific requirements of your application, such as the commands to be run, file paths, and any other necessary configurations.
 
+Once you've edited the file to fit your needs, run the following from the command-line:
 ```shell
 hpcac run-tasks
 ```
