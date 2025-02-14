@@ -1,4 +1,0 @@
-add to that readme file after the part where says to generate aws credentials, the links where theach how to generate the access keys (2 links):
-
-- https://docs.aws.amazon.com/IAM/latest/UserGuide/access-key-self-managed.html
-- https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user_manage_add-key.html
