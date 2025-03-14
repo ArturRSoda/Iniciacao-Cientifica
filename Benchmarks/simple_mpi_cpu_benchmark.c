@@ -33,6 +33,8 @@ int main(int argc, char *argv[]) {
     double end_time = MPI_Wtime();
     double elapsed_time = end_time - start_time;
 
+    MPI_Barrier(MPI_COMM_WORLD);
+
     if (rank == 0) {
         printf("Computation completed. Final sum: %f\n", (double)sum);
         printf("Total time taken: %f seconds\n", elapsed_time);
